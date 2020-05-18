@@ -16,9 +16,9 @@ def train(model, data, data_percentage = 100, epochs = 1):
     dataset_size = 24*len(data)*data_percentage//100 - 1 # -1 for the last item
     for epoch in range(epochs):
         print(f'Epoch {epoch}', dataset_size)
-        X = []
-        Y = []
         for t in range(dataset_size-1):
+            X = []
+            Y = []
             initial_time = time.time()
             print(f'Etapa: {t}/{dataset_size-1}\n')
             current_hour = data[t // 24][t % 24]
@@ -48,10 +48,11 @@ def train(model, data, data_percentage = 100, epochs = 1):
                                                 )
                                         X.append(x)
                                         Y.append(round(y))
+            print('Training')
+            fit(model, X, Y)
+            print('End training')
             end_time = time.time()
             print(f'\nTiempo: {end_time - initial_time}')
-        print("Training model")
-        fit(model, X, Y)
 
 if __name__ == "__main__":
     percentage = int(sys.argv[1])
