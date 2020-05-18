@@ -5,7 +5,7 @@ CAR_BATTERY_MAX_CAP = 30
 CHARGING_SPEED = 8
 
 def state(current_hour, next_hour, car_connected, car_energy, battery_energy, current_temperature, b, c, air):
-    print(f'\r State: {car_connected},{car_energy},{battery_energy},{current_temperature},{b},{c},{air}', end='')
+    # print(f'\r State: {car_connected},{car_energy},{battery_energy},{current_temperature},{b},{c},{air}', end='')
     '''Temperature A/C'''
     ptt = nextTemp(current_hour['temperature'], current_temperature, air) # power to temp
     air_use, next_temp = ptt # power of A/C
