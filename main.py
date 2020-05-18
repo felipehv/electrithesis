@@ -13,7 +13,7 @@ def fit(model, x, y):
     return model.fit(x, y)
 
 def train(model, data, data_percentage = 100, epochs = 1):
-    dataset_size = 24*len(data)*data_percentage//1000 - 1 # -1 for the last item
+    dataset_size = 24*len(data)*data_percentage//100 - 1 # -1 for the last item
     for epoch in range(epochs):
         print(f'Epoch {epoch}', dataset_size)
         X = []

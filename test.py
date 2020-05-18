@@ -12,7 +12,7 @@ import datetime
 def test(model, data, data_percentage = 100):
     X=[]
     Y=[]
-    dataset_size = 24*len(data)*data_percentage//1000 - 1 # -1 for the last item
+    dataset_size = 24*len(data)*data_percentage//100 - 1 # -1 for the last item
     for t in range(dataset_size-1):
         initial_time = time.time()
         print(f'Etapa: {t}/{dataset_size-1}\n')
