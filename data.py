@@ -13,9 +13,9 @@ for day in data_2016:
         data['temperature'] = celsius(data['temperature'])
         data['total'] = round(data['total'], 2)
 
-# with open(f'{PATH}/data_2018_dict.dump', 'r') as reader:
-#     data_2018 = json.loads(reader.read())
-# for day in data_2018:
-#     for data in day:
-#         data['temperature'] = celsius(data['temperature'])
-#         data['total'] = round(data['total'], 2)
+with open(f'{PATH}/data_2018_dict.dump', 'r') as reader:
+    data_2018 = json.loads(reader.read())
+for day in data_2018:
+    for data in day:
+        data['temperature'] = celsius(data['temperature'])
+        data['total'] = round(data['total'], 2)

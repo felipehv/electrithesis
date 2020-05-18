@@ -10,17 +10,17 @@ from joblib import dump, load
 import datetime
 
 def fit(model, x, y):
-    return model.fit(x, y)
+    return model.partial_fit(x, y)
 
 def train(model, data, data_percentage = 100, epochs = 1):
-    dataset_size = len(data)//100*data_percentage
+    dataset_size = 24*len(data)*data_percentage//1000 - 1 # -1 for the last item
     for epoch in range(epochs):
-        print(f'Epoch {epoch}')
+        print(f'Epoch {epoch}', dataset_size)
         X = []
         Y = []
-        for t in range(24*dataset_size-1):
+        for t in range(dataset_size-1):
             initial_time = time.time()
-            print(f'Etapa: {t}/{24*dataset_size-1}\n')
+            print(f'Etapa: {t}/{dataset_size-1}\n')
             current_hour = data[t // 24][t % 24]
             next_hour = data[(t+1) // 24][(t+1) % 24]
 
@@ -47,15 +47,16 @@ def train(model, data, data_percentage = 100, epochs = 1):
                                                     b, c, air
                                                 )
                                         X.append(x)
-                                        Y.append(y)
+                                        Y.append(round(y))
             end_time = time.time()
             print(f'\nTiempo: {end_time - initial_time}')
-        fit(mlp, X, Y)
+        print("Training model")
+        fit(model, X, Y)
 
 if __name__ == "__main__":
     percentage = int(sys.argv[1])
     epochs = int(sys.argv[2])
-    mlp = neural_network.MLPRegressor(hidden_layer_sizes=(16,), solver='sgd', max_iter=1)
+    mlp = neural_network.MLPRegressor(hidden_layer_sizes=(16,), solver='adam')
     train(mlp, data_2016, data_percentage=percentage, epochs=epochs)
     print("Saving model")
     dt_now= datetime.datetime.now().isoformat()
