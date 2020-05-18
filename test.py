@@ -61,3 +61,4 @@ if __name__ == "__main__":
     print(f'Mean Squared Error: {mse}')
     for i in range(20):
         print(predicted[i], real[i])
+    print("The end")
