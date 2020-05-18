@@ -53,6 +53,11 @@ if __name__ == "__main__":
     mlp_saved = load(filename)
     X,Y = test(mlp_saved, data_2018, data_percentage=percentage)
     # Caluclar MSE
-    print(mlp_saved.score(X,Y))
-    print(f'Error cuadratico medio: {mse}')
-    print("Saving model")
+    r2 = mlp_saved.score(X,Y)
+    print(f'R squared: {r2}')
+    predicted = mlp_saved.predict(X)
+    real = Y
+    mse = sum([ (y_pred - y_real)**2 for y_pred, y_real in zip(predicted, real)]) / len(predicted)
+    print(f'Mean Squared Error: {mse}')
+    for i in range(20):
+        print(predicted[i], real[i])
