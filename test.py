@@ -22,7 +22,7 @@ def test(model, data, data_percentage = 100):
         """Iterate over states (battery status, car...)"""
         for car_connected in [False, True]:
             for car_energy in range(30):
-                print(f'\rcar_connected: {car_connected}, car_energy: {car_energy}')
+                print(f'\r car_connected: {car_connected}, car_energy: {car_energy}', end='')
                 for battery_energy in range(0, 10):
                     lower_temp = current_hour['temperature'] - 10
                     upper_temp = current_hour['temperature'] + 10
