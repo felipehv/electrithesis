@@ -10,7 +10,7 @@ from joblib import dump, load
 import datetime
 
 def fit(model, x, y):
-    return model.partial_fit(x, y)
+    return model.fit(x, y)
 
 def train(model, data, data_percentage = 100, epochs = 1):
     dataset_size = 24*len(data)*data_percentage//100 - 1 # -1 for the last item
