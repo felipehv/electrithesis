@@ -57,8 +57,8 @@ def train(model, data, data_percentage = 100, epochs = 1):
 
 if __name__ == "__main__":
     percentage = int(sys.argv[1])
-    epochs = int(sys.argv[2])
-    mlp = neural_network.MLPRegressor(hidden_layer_sizes=(16,), solver='adam')
+    solver = sys.argv[2]
+    mlp = neural_network.MLPRegressor(hidden_layer_sizes=(16,), solver=solver)
     train(mlp, data_2016, data_percentage=percentage)
     print("Saving model")
     dt_now= datetime.datetime.now().isoformat()
