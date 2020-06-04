@@ -11,8 +11,8 @@ import datetime
 import pandas
 from functools import reduce
 
-def export_csv(data, data_percentage=1):
-    dataset_size = len(data)
+def export_csv(data, data_percentage=100):
+    dataset_size = 24*len(data)
     for t in range(dataset_size-1):
         file = open('train_data.csv', 'a')
         data_rows=[]
