@@ -14,6 +14,8 @@ def state(current_hour, next_hour, car_connected, car_energy, battery_energy, cu
     nc_use = next_hour['total']
 
     '''Car charging cost'''
+    # Car energy is discretized (one unit means 3)
+    car_energy = car_energy * 3
     if car_connected and c == 0:
         car_use = min([CHARGING_SPEED, (CAR_BATTERY_MAX_CAP - car_energy)])
     else:
