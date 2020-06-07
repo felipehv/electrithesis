@@ -46,7 +46,7 @@ if __name__ == "__main__":
     print("Iniciando")
     solver = sys.argv[1]
     client = Client(processes=False, threads_per_worker=4,
-                n_workers=1, memory_limit='2GB')
+                n_workers=2, memory_limit='3GB')
     print(client)
     mlp = neural_network.MLPRegressor(hidden_layer_sizes=(16,), solver=solver, verbose=True)
     train(mlp, 'train_data.csv')
