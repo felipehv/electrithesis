@@ -53,7 +53,7 @@ def export_csv(data, data_percentage=100):
 
 if __name__ == "__main__":
     with open('train_data.csv', 'w') as writer:
-        writer.write('current_hour,next_hour,car_connected,car_energy,battery_energy,current_temperature,b,c,air,cost\n')
+        writer.write('total,temperature,humidity,solar,car_connected,car_energy,battery_energy,current_temperature,b,c,air,cost\n')
     export_csv(data_2016)
     print("Saving...")
     print("Finished")
