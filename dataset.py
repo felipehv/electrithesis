@@ -26,7 +26,8 @@ def export_csv(data, data_percentage=100):
             print(f'\r battery_energy: {battery_energy}', end='')
             lower_temp = current_hour['temperature'] - 5
             upper_temp = current_hour['temperature'] + 5
-            for current_temperature in [lower_temp, upper_temp]: # Cambiar rango a +-10 de temperatura de afuera
+            current_temp = current_hour['temperature']
+            for current_temperature in [lower_temp, current_temp, upper_temp]: # Cambiar rango a +-10 de temperatura de afuera
                 for car_connected in [False, True]:
                     for car_energy in range(0, car_connected * 30 + 1, 6): # each unit is 3 kwh
                         """Iterate over actions"""
