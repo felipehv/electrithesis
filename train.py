@@ -48,9 +48,20 @@ if __name__ == "__main__":
     client = Client(processes=False, threads_per_worker=4,
                 n_workers=2, memory_limit='3GB')
     print(client)
-    mlp = neural_network.MLPRegressor(hidden_layer_sizes=(16,), solver=solver, verbose=True)
+    mlp = neural_network.MLPRegressor(
+        hidden_layer_sizes=(16,), 
+        solver=solver, 
+        verbose=True,
+        activation='relu',
+        batch_size=32,
+        learning_rate_init=0.01, # funciona mejor
+        tol=1e-3,
+        early_stopping=False,
+        epsilon=1e-4,
+        n_iter_no_change=3)
+    mlp = load('mlp.joblib')
     train(mlp, 'train_data.csv')
     print("Saving model")
     dt_now= datetime.datetime.now().isoformat()
-    dump(mlp, f'mlp-{dt_now}.joblib')
+    dump(mlp, f'mlp.joblib')
     print("Finished")

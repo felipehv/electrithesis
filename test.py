@@ -24,9 +24,9 @@ def test(model, data, data_percentage = 100):
             print(f'\r battery_energy: {battery_energy}', end='')
             lower_temp = current_hour['temperature'] - 10
             upper_temp = current_hour['temperature'] + 10
-            for current_temperature in range(lower_temp, upper_temp + 1): # Cambiar rango a +-10 de temperatura de afuera
+            for current_temperature in [lower_temp, upper_temp]: # Cambiar rango a +-10 de temperatura de afuera
                 for car_connected in [False, True]:
-                    for car_energy in range(0, car_connected * 30 + 1):
+                    for car_energy in range(0, car_connected * 30 + 1, 5):
                         """Iterate over actions"""
                         for b in range(2):
                         # battery actions: 0: CHARGE, 1: USE
