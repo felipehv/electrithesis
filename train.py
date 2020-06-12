@@ -10,8 +10,8 @@ from joblib import dump, load
 import datetime
 import numpy as np
 import pandas as pd
-from dask.distributed import Client, progress
-from dask_ml.wrappers import ParallelPostFit
+# from dask.distributed import Client, progress
+# from dask_ml.wrappers import ParallelPostFit
 import joblib
 
 def fit(model, x, y):
@@ -37,17 +37,16 @@ def train(model, filename):
     x = pd.read_csv('train_data.csv', dtype=dtype)
     y = x.pop('cost').values
     print("Iniciando entrenamiento")
-    with joblib.parallel_backend('dask'):
-        model.fit(x, y)
+    model.fit(x, y)
     print("Fin del entrenamiento")
 
 
 if __name__ == "__main__":
     print("Iniciando")
     solver = sys.argv[1]
-    client = Client(processes=False, threads_per_worker=4,
-                n_workers=2, memory_limit='3GB')
-    print(client)
+    # client = Client(processes=False, threads_per_worker=4,
+    #             n_workers=2, memory_limit='3GB')
+    # print(client)
     mlp = neural_network.MLPRegressor(
         hidden_layer_sizes=(16,), 
         solver=solver, 
