@@ -59,7 +59,7 @@ if __name__ == "__main__":
         early_stopping=False,
         epsilon=1e-4,
         n_iter_no_change=3)
-    mlp = load('mlp.joblib')
+    # mlp = load('mlp.joblib')
     train(mlp, 'train_data.csv')
     print("Saving model")
     dt_now= datetime.datetime.now().isoformat()
