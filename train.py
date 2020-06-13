@@ -50,7 +50,7 @@ if __name__ == "__main__":
     mlp = neural_network.MLPRegressor(
         hidden_layer_sizes=(16,), 
         solver=solver, 
-        verbose=True,
+        verbose=10,
         activation='relu',
         batch_size=32,
         learning_rate_init=0.01, # funciona mejor
