@@ -13,6 +13,9 @@ def test(model, data, data_percentage = 100):
     X=[]
     Y=[]
     dataset_size = 24*len(data)*data_percentage//100 - 1 # -1 for the last item
+    corrects = 0
+    incorrects = 0
+    total_tests = 0
     for t in range(dataset_size-1):
         initial_time = time.time()
         print(f'Etapa: {t}/{dataset_size-1}\n')
@@ -28,6 +31,10 @@ def test(model, data, data_percentage = 100):
                 for car_connected in [False, True]:
                     for car_energy in range(0, car_connected * 30 + 1, 5):
                         """Iterate over actions"""
+                        min_cost = 10000000
+                        min_action = [0,0,0]
+                        min_pred_cost = 10000000
+                        min_pred_action = [0,0,0]
                         for b in range(2):
                         # battery actions: 0: CHARGE, 1: USE
                             for c in range(2):
@@ -44,8 +51,25 @@ def test(model, data, data_percentage = 100):
                                             )
                                     X.append(x)
                                     Y.append(y)
+                                    y_pred = model.predict([x])
+                                    # for real cost
+                                    if y < min_cost:
+                                        min_action = [b,c,air]
+                                        min_cost = y
+                                    # for NN cost
+                                    if y_pred < min_pred_cost:
+                                        min_pred_action = [b,c,air]
+                                        min_pred_cost = y
+                    # Do the shit
+                    if min_action == min_pred_action:
+                        corrects += 1
+                    else:
+                        incorrects += 1
+                    total_tests += 1
         end_time = time.time()
         print(f'\nTiempo: {end_time - initial_time}')
+        print(f'{corrects}, {incorrects}')
+        print(f'Total choices accuracy: {100*corrects/total_tests}%')
     return X, Y
 
 if __name__ == "__main__":
