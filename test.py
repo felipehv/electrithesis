@@ -16,12 +16,12 @@ def test(model, data, data_percentage = 100):
     corrects = 0
     incorrects = 0
     total_tests = 0
+    places = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 'rest': 0}
     for t in range(dataset_size-1):
         initial_time = time.time()
         print(f'Etapa: {t}/{dataset_size-1}\n')
         current_hour = data[t // 24][t % 24]
         next_hour = data[(t+1) // 24][(t+1) % 24]
-
         """Iterate over states (battery status, car...)"""
         for battery_energy in range(0, 10):
             print(f'\r battery_energy: {battery_energy}', end='')
@@ -61,17 +61,28 @@ def test(model, data, data_percentage = 100):
                                     # for NN cost
                                     if y_pred < min_pred_cost:
                                         min_pred_action = [b,c,air]
-                                        min_pred_cost = y
-                    
+                                        min_pred_cost = y_pred
+
                         # Do the shit
                         if min_action == min_pred_action:
                             corrects += 1
                         else:
                             incorrects += 1
+
+                        pred_cost_index = 10 * min_pred_action[0] + 5 * min_pred_action[1] + min_pred_action[2]
+                        pred_cost = real_costs[pred_cost_index]
+                        real_costs.sort()
+                        place = real_costs.index(pred_cost) + 1
+    
+                        if place not in places:
+                            places['rest'] += 1
+                        else:
+                            places[place] += 1
                         total_tests += 1
         end_time = time.time()
         print(f'\nTiempo: {end_time - initial_time}')
         print(f'{corrects}, {incorrects}')
+        print(f'1st: {places[1]} - 2nd: {places[2]} - 3rd: {places[3]} - 4th: {places[4]} - rest: {places["rest"]}')
         print(f'Total choices accuracy: {100*corrects/total_tests}%')
     return X, Y
 
