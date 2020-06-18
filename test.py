@@ -27,7 +27,7 @@ def test(model, data, data_percentage = 100):
             print(f'\r battery_energy: {battery_energy}', end='')
             lower_temp = current_hour['temperature'] - 10
             upper_temp = current_hour['temperature'] + 10
-            for current_temperature in [lower_temp, upper_temp]: # Cambiar rango a +-10 de temperatura de afuera
+            for current_temperature in range(lower_temp, upper_temp, 2): # Cambiar rango a +-10 de temperatura de afuera
                 for car_connected in [False, True]:
                     for car_energy in range(0, car_connected * 30 + 1, 5):
                         """Iterate over actions"""
@@ -63,12 +63,7 @@ def test(model, data, data_percentage = 100):
                                         min_pred_action = [b,c,air]
                                         min_pred_cost = y_pred
 
-                        # Do the shit
-                        if min_action == min_pred_action:
-                            corrects += 1
-                        else:
-                            incorrects += 1
-
+                        # Calcular lugar de predicción
                         pred_cost_index = 10 * min_pred_action[0] + 5 * min_pred_action[1] + min_pred_action[2]
                         pred_cost = real_costs[pred_cost_index]
                         real_costs.sort()
@@ -81,9 +76,9 @@ def test(model, data, data_percentage = 100):
                         total_tests += 1
         end_time = time.time()
         print(f'\nTiempo: {end_time - initial_time}')
-        print(f'{corrects}, {incorrects}')
+        print(f'{places[1]}, {total_tests - places[1]}')
         print(f'1st: {places[1]} - 2nd: {places[2]} - 3rd: {places[3]} - 4th: {places[4]} - rest: {places["rest"]}')
-        print(f'Total choices accuracy: {100*corrects/total_tests}%')
+        print(f'Total choices accuracy: {100*places[1]/total_tests}%')
     return X, Y
 
 if __name__ == "__main__":
@@ -98,6 +93,6 @@ if __name__ == "__main__":
     real = Y
     mse = sum([ (y_pred - y_real)**2 for y_pred, y_real in zip(predicted, real)]) / len(predicted)
     print(f'Mean Squared Error: {mse}')
-    for i in range(20):
+    for i in range(30):
         print(predicted[i], real[i])
     print("The end")
