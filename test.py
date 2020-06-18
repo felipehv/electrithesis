@@ -33,6 +33,7 @@ def test(model, data, data_percentage = 100):
                         """Iterate over actions"""
                         min_cost = 10000000
                         min_action = [0,0,0]
+                        real_costs = []
                         min_pred_cost = 10000000
                         min_pred_action = [0,0,0]
                         for b in range(2):
@@ -52,6 +53,7 @@ def test(model, data, data_percentage = 100):
                                     X.append(x)
                                     Y.append(y)
                                     y_pred = model.predict([x])
+                                    real_costs.append(y)
                                     # for real cost
                                     if y < min_cost:
                                         min_action = [b,c,air]
@@ -60,12 +62,13 @@ def test(model, data, data_percentage = 100):
                                     if y_pred < min_pred_cost:
                                         min_pred_action = [b,c,air]
                                         min_pred_cost = y
-                    # Do the shit
-                    if min_action == min_pred_action:
-                        corrects += 1
-                    else:
-                        incorrects += 1
-                    total_tests += 1
+                    
+                        # Do the shit
+                        if min_action == min_pred_action:
+                            corrects += 1
+                        else:
+                            incorrects += 1
+                        total_tests += 1
         end_time = time.time()
         print(f'\nTiempo: {end_time - initial_time}')
         print(f'{corrects}, {incorrects}')
