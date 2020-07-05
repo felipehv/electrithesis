@@ -24,7 +24,6 @@ def export_csv(data, path, data_percentage=100):
 
         """Iterate over states (battery status, car...)"""
         for battery_energy in range(0, 5): # battery energy uses only 5 states (2 units each.)
-            print(f'\r battery_energy: {battery_energy}', end='')
             lower_temp = current_hour['temperature'] - 5
             upper_temp = current_hour['temperature'] + 5
             current_temp = current_hour['temperature']

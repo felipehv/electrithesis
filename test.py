@@ -25,7 +25,7 @@ def test(model, data, data_percentage = 100):
         next_hour = data[(t+1) // 24][(t+1) % 24]
         """Iterate over states (battery status, car...)"""
         for battery_energy in range(0, 10):
-            print(f'\r battery_energy: {battery_energy}', end='')
+            # print(f'\r battery_energy: {battery_energy}', end='')
             lower_temp = current_hour['temperature'] - 10
             upper_temp = current_hour['temperature'] + 10
             for current_temperature in range(lower_temp, upper_temp, 2): # Cambiar rango a +-10 de temperatura de afuera
