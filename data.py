@@ -13,8 +13,8 @@ def load_data(path, which='2016'):
             for data in day:
                 data['temperature'] = celsius(data['temperature'])
                 data['total'] = round(data['total'], 2)
-        return data_2018
-        
+        return data_2016
+
     elif which == '2018':
         with open(f'{path}/data_2018_dict.dump', 'r') as reader:
             data_2018 = json.loads(reader.read())
