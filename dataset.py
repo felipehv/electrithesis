@@ -1,15 +1,16 @@
 import numpy as np
 from sklearn import neural_network
 import json
-from state import state
-from utils import *
 import time
-from data import *
 import sys
 from joblib import dump, load
 import datetime
 import pandas
 from functools import reduce
+
+from .utils import *
+from .data import *
+from .state import state
 
 def export_csv(data, data_percentage=100):
     dataset_size = 24*len(data)
@@ -53,6 +54,7 @@ def export_csv(data, data_percentage=100):
         print(f'\nTiempo: {end_time - initial_time}')
 
 if __name__ == "__main__":
+    data_2016 = load_data('.', which='2016')
     with open('train_data.csv', 'w') as writer:
         writer.write('total,temperature,humidity,solar,car_connected,car_energy,battery_energy,current_temperature,b,c,air,cost\n')
     export_csv(data_2016)

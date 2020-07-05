@@ -1,4 +1,4 @@
-from utils import *
+from .utils import *
 
 TEMP_COMFORT = 20
 CAR_BATTERY_MAX_CAP = 30

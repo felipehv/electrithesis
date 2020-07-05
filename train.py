@@ -1,18 +1,16 @@
 import numpy as np
 from sklearn import neural_network
 import json
-from state import state
-from utils import *
 import time
-from data import *
 import sys
 from joblib import dump, load
 import datetime
 import numpy as np
 import pandas as pd
-# from dask.distributed import Client, progress
-# from dask_ml.wrappers import ParallelPostFit
 import joblib
+
+from .utils import *
+from .state import state
 
 def fit(model, x, y):
     return model.fit(x, y)

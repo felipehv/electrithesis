@@ -1,13 +1,14 @@
 import numpy as np
 from sklearn import neural_network
 import json
-from state import state
-from utils import *
 import time
-from data import *
 import sys
 from joblib import dump, load
 import datetime
+
+from .data import *
+from .utils import *
+from .state import state
 
 def test(model, data, data_percentage = 100):
     X=[]
@@ -85,6 +86,7 @@ if __name__ == "__main__":
     filename = sys.argv[1]
     percentage = int(sys.argv[2])
     mlp_saved = load(filename)
+    data_2018 = load_data('.', which='2018')
     X,Y = test(mlp_saved, data_2018, data_percentage=percentage)
     # Caluclar MSE
     r2 = mlp_saved.score(X,Y)
