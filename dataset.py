@@ -12,7 +12,7 @@ from .utils import *
 from .data import *
 from .state import state
 
-def export_csv(data, data_percentage=100, path):
+def export_csv(data, path, data_percentage=100):
     dataset_size = 24*len(data)
     for t in range(dataset_size-1):
         file = open(path, 'a')
