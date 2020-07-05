@@ -12,10 +12,10 @@ from .utils import *
 from .data import *
 from .state import state
 
-def export_csv(data, data_percentage=100):
+def export_csv(data, data_percentage=100, path):
     dataset_size = 24*len(data)
     for t in range(dataset_size-1):
-        file = open('train_data.csv', 'a')
+        file = open(path, 'a')
         data_rows=[]
         initial_time = time.time()
         print(f'Etapa: {t}/{dataset_size-1}\n')
