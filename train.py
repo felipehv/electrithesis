@@ -15,25 +15,8 @@ from .state import state
 def fit(model, x, y):
     return model.fit(x, y)
 
-def train(model, filename):
+def train(model, x, y):
     # Open pandas dataset
-    dtype = {
-        'total': np.float64,
-        'temperature': np.int32,
-        'humidity': np.float64,
-        'solar': np.float64,
-        'car_connected': np.int32,
-        'car_energy': np.int32,
-        'battery_energy': np.int32,
-        'current_temperature': np.int32,
-        'b': np.int32,
-        'c': np.int32,
-        'air': np.int32,
-        'cost': np.int32
-    }
-    print("Cargando datos")
-    x = pd.read_csv(filename, dtype=dtype)
-    y = x.pop('cost').values
     print("Iniciando entrenamiento")
     model.fit(x, y)
     print("Fin del entrenamiento")
