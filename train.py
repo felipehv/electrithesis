@@ -32,7 +32,7 @@ def train(model, filename):
         'cost': np.int32
     }
     print("Cargando datos")
-    x = pd.read_csv('train_data.csv', dtype=dtype)
+    x = pd.read_csv(filename, dtype=dtype)
     y = x.pop('cost').values
     print("Iniciando entrenamiento")
     model.fit(x, y)
@@ -57,7 +57,10 @@ if __name__ == "__main__":
         epsilon=1e-4,
         n_iter_no_change=3)
     # mlp = load('mlp.joblib')
+    initial_time = time.now()
     train(mlp, 'train_data.csv')
+    end_time = time.now()
+    print("Time training:")
     print("Saving model")
     dt_now= datetime.datetime.now().isoformat()
     dump(mlp, f'mlp.joblib')
